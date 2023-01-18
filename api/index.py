@@ -6,9 +6,15 @@ from flask import Flask, request
 app = Flask(__name__)
 os.environ.get("REPLICATE_API_TOKEN")
 
-@app.route("/")
+@app.route('/')
 def index():
-    return "This is an alt tag generator!"
+    return '<h3> enter image url </h3> <form method="POST"><input name="text"><input type="submit"></form>'
+
+@app.route('/', methods=['POST'])
+def my_form_post():
+    text = request.form['text']
+    processed_text = text
+    return '<a href=' '/generate?imageUrl=' + processed_text + '>Generate Alt Text</a>'
 
 @app.route('/generate')
 def home():
